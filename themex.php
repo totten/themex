@@ -87,18 +87,18 @@ function themex_civicrm_managed(&$entities) {
   _themex_civix_civicrm_managed($entities);
 }
 
-/**
- * Implements hook_civicrm_caseTypes().
- *
- * Generate a list of case-types.
- *
- * Note: This hook only runs in CiviCRM 4.4+.
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_caseTypes
- */
-function themex_civicrm_caseTypes(&$caseTypes) {
-  _themex_civix_civicrm_caseTypes($caseTypes);
-}
+///**
+// * Implements hook_civicrm_caseTypes().
+// *
+// * Generate a list of case-types.
+// *
+// * Note: This hook only runs in CiviCRM 4.4+.
+// *
+// * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_caseTypes
+// */
+//function themex_civicrm_caseTypes(&$caseTypes) {
+//  _themex_civix_civicrm_caseTypes($caseTypes);
+//}
 
 /**
  * Implements hook_civicrm_angularModules().
@@ -123,41 +123,41 @@ function themex_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
   _themex_civix_civicrm_alterSettingsFolders($metaDataFolders);
 }
 
-/**
- * Implements hook_civicrm_entityTypes().
- *
- * Declare entity types provided by this module.
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_entityTypes
- */
-function themex_civicrm_entityTypes(&$entityTypes) {
-  _themex_civix_civicrm_entityTypes($entityTypes);
-}
+///**
+// * Implements hook_civicrm_entityTypes().
+// *
+// * Declare entity types provided by this module.
+// *
+// * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_entityTypes
+// */
+//function themex_civicrm_entityTypes(&$entityTypes) {
+//  _themex_civix_civicrm_entityTypes($entityTypes);
+//}
 
 // --- Functions below this ship commented out. Uncomment as required. ---
 
 /**
- * Implements hook_civicrm_preProcess().
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_preProcess
- *
-function themex_civicrm_preProcess($formName, &$form) {
+ * Implements hook_civicrm_container().
+ */
+function themex_civicrm_container(\Symfony\Component\DependencyInjection\ContainerBuilder $container) {
+  $container->addResource(new \Symfony\Component\Config\Resource\FileResource(__FILE__));
 
-} // */
+  $container->setDefinition('resources', new \Symfony\Component\DependencyInjection\Definition(
+    'CRM_Core_Resources',
+    [new \Symfony\Component\DependencyInjection\Reference('service_container')]
+  ))->setFactory('_themex_create_resources');
 
-/**
- * Implements hook_civicrm_navigationMenu().
- *
- * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_navigationMenu
- *
-function themex_civicrm_navigationMenu(&$menu) {
-  _themex_civix_insert_navigation_menu($menu, 'Mailings', array(
-    'label' => E::ts('New subliminal message'),
-    'name' => 'mailing_subliminal_message',
-    'url' => 'civicrm/mailing/subliminal',
-    'permission' => 'access CiviMail',
-    'operator' => 'OR',
-    'separator' => 0,
+  $container->setDefinition('themes', new \Symfony\Component\DependencyInjection\Definition(
+    'Civi\Themex\Themes',
+    array()
   ));
-  _themex_civix_navigationMenu($menu);
-} // */
+}
+
+function _themex_create_resources($container) {
+  $sys = \CRM_Extension_System::singleton();
+  return new Civi\Themex\Resources(
+    $sys->getMapper(),
+    $container->get('cache.js_strings'),
+    \CRM_Core_Config::isUpgradeMode() ? NULL : 'resCacheCode'
+  );
+}
