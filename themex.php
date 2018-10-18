@@ -161,3 +161,17 @@ function _themex_create_resources($container) {
     \CRM_Core_Config::isUpgradeMode() ? NULL : 'resCacheCode'
   );
 }
+
+function themex_civicrm_navigationMenu(&$params) {
+  _themex_civix_insert_navigation_menu($params, 'Administer/System Settings', array(
+    'label' => ts('Themes', array('domain' => E::LONG_NAME)),
+    'name' => 'theme_admin',
+    'permission' => 'administer CiviCRM',
+    'child' => array(),
+    'operator' => 'AND',
+    'separator' => 0,
+    'url' => CRM_Utils_System::url('civicrm/admin/theme', 'reset=1', TRUE),
+  ));
+
+  _themex_civix_navigationMenu($params);
+}

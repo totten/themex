@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/admin/theme</path>
+    <page_callback>CRM_Themex_Form_ThemeAdmin</page_callback>
+    <title>Themes</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+</menu>
