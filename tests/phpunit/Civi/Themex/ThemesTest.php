@@ -67,9 +67,6 @@ class ThemesTest extends \PHPUnit_Framework_TestCase implements HeadlessInterfac
       ),
     );
 
-    $civicrmBaseUrl = "";
-    $themexBaseUrl = "/ext/themex";
-
     // --- Library of tests ---
 
     // Use the default theme, Greenwich.
@@ -78,9 +75,9 @@ class ThemesTest extends \PHPUnit_Framework_TestCase implements HeadlessInterfac
       'default',
       'Greenwich',
       array(
-        'civicrm-css/civicrm.css' => array("$civicrmBaseUrl/css/civicrm.css"),
-        'civicrm-css/joomla.css' => array("$civicrmBaseUrl/css/joomla.css"),
-        'test.extension.uitest-files/foo.css' => array("$themexBaseUrl/tests/extensions/test.extension.uitest/files/foo.css"),
+        'civicrm-css/civicrm.css' => array("%%CIVICRM_BASE_URL%%/css/civicrm.css"),
+        'civicrm-css/joomla.css' => array("%%CIVICRM_BASE_URL%%/css/joomla.css"),
+        'test.extension.uitest-files/foo.css' => array("%%THEMEX_BASE_URL%%/tests/extensions/test.extension.uitest/files/foo.css"),
       ),
     );
 
@@ -92,9 +89,9 @@ class ThemesTest extends \PHPUnit_Framework_TestCase implements HeadlessInterfac
       // Example theme to inspect
       'Judy Garland',
       array(
-        'civicrm-css/civicrm.css' => array("$themexBaseUrl/tests/phpunit/Civi/Themex/Theme/judy/css/civicrm.css"),
-        'civicrm-css/joomla.css' => array("$civicrmBaseUrl/css/joomla.css"),
-        'test.extension.uitest-files/foo.css' => array("$themexBaseUrl/tests/extensions/test.extension.uitest/files/foo.css"),
+        'civicrm-css/civicrm.css' => array("%%THEMEX_BASE_URL%%/tests/phpunit/Civi/Themex/Theme/judy/css/civicrm.css"),
+        'civicrm-css/joomla.css' => array("%%CIVICRM_BASE_URL%%/css/joomla.css"),
+        'test.extension.uitest-files/foo.css' => array("%%THEMEX_BASE_URL%%/tests/extensions/test.extension.uitest/files/foo.css"),
         'test.extension.uitest-files/ignoreme.css' => array(), // excluded
       ),
     );
@@ -105,9 +102,9 @@ class ThemesTest extends \PHPUnit_Framework_TestCase implements HeadlessInterfac
       'liza',
       'Greenwich',
       array(
-        'civicrm-css/civicrm.css' => array("$civicrmBaseUrl/css/civicrm.css"),
-        'civicrm-css/joomla.css' => array("$civicrmBaseUrl/css/joomla.css"),
-        'test.extension.uitest-files/foo.css' => array("$themexBaseUrl/tests/extensions/test.extension.uitest/files/foo.css"),
+        'civicrm-css/civicrm.css' => array("%%CIVICRM_BASE_URL%%/css/civicrm.css"),
+        'civicrm-css/joomla.css' => array("%%CIVICRM_BASE_URL%%/css/joomla.css"),
+        'test.extension.uitest-files/foo.css' => array("%%THEMEX_BASE_URL%%/tests/extensions/test.extension.uitest/files/foo.css"),
       ),
     );
 
@@ -118,8 +115,8 @@ class ThemesTest extends \PHPUnit_Framework_TestCase implements HeadlessInterfac
       'None (Unstyled)',
       array(
         'civicrm-css/civicrm.css' => array(),
-        'civicrm-css/joomla.css' => array("$civicrmBaseUrl/css/joomla.css"),
-        'test.extension.uitest-files/foo.css' => array("$themexBaseUrl/tests/extensions/test.extension.uitest/files/foo.css"),
+        'civicrm-css/joomla.css' => array("%%CIVICRM_BASE_URL%%/css/joomla.css"),
+        'test.extension.uitest-files/foo.css' => array("%%THEMEX_BASE_URL%%/tests/extensions/test.extension.uitest/files/foo.css"),
       ),
     );
 
@@ -129,11 +126,11 @@ class ThemesTest extends \PHPUnit_Framework_TestCase implements HeadlessInterfac
       'liza',
       'Liza Minnelli',
       array(
-        'civicrm-css/civicrm.css' => array("$themexBaseUrl/tests/phpunit/Civi/Themex/Theme/liza/css/civicrm.css"),
-        'civicrm-css/joomla.css' => array("$civicrmBaseUrl/css/joomla.css"),
-        'test.extension.uitest-files/foo.css' => array("$themexBaseUrl/tests/phpunit/Civi/Themex/Theme/liza/test.extension.uitest-files/foo.css"),
+        'civicrm-css/civicrm.css' => array("%%THEMEX_BASE_URL%%/tests/phpunit/Civi/Themex/Theme/liza/css/civicrm.css"),
+        'civicrm-css/joomla.css' => array("%%CIVICRM_BASE_URL%%/css/joomla.css"),
+        'test.extension.uitest-files/foo.css' => array("%%THEMEX_BASE_URL%%/tests/phpunit/Civi/Themex/Theme/liza/test.extension.uitest-files/foo.css"),
         // WARNING: If your local system has overrides for the **debug_enabled**, these results may vary.
-        'civicrm-css/civicrm.min.css' => array("$themexBaseUrl/tests/phpunit/Civi/Themex/Theme/liza/css/civicrm.min.css"),
+        'civicrm-css/civicrm.min.css' => array("%%THEMEX_BASE_URL%%/tests/phpunit/Civi/Themex/Theme/liza/css/civicrm.min.css"),
       ),
     );
 
@@ -144,7 +141,7 @@ class ThemesTest extends \PHPUnit_Framework_TestCase implements HeadlessInterfac
       'Blue Marine',
       array(
         'civicrm-css/civicrm.css' => array('http://example.com/blue/civicrm.css'),
-        'civicrm-css/joomla.css' => array("$civicrmBaseUrl/css/joomla.css"),
+        'civicrm-css/joomla.css' => array("%%CIVICRM_BASE_URL%%/css/joomla.css"),
         'test.extension.uitest-files/foo.css' => array('http://example.com/blue/foobar/foo.css'),
       ),
     );
@@ -156,7 +153,7 @@ class ThemesTest extends \PHPUnit_Framework_TestCase implements HeadlessInterfac
       'Aqua Marine',
       array(
         'civicrm-css/civicrm.css' => array('http://example.com/aqua/civicrm.css'),
-        'civicrm-css/joomla.css' => array("$civicrmBaseUrl/css/joomla.css"),
+        'civicrm-css/joomla.css' => array("%%CIVICRM_BASE_URL%%/css/joomla.css"),
         'test.extension.uitest-files/foo.css' => array('http://example.com/blue/foobar/foo.css'),
       ),
     );
@@ -190,6 +187,7 @@ class ThemesTest extends \PHPUnit_Framework_TestCase implements HeadlessInterfac
     }
 
     foreach ($expectedUrls as $inputFile => $expectedUrl) {
+      $expectedUrl = $this->interpolateAll($expectedUrl);
       list ($ext, $file) = explode('-', $inputFile, 2);
       $actualUrl = $themeSvc->resolveUrls($themeSvc->getActiveThemeKey(), $ext, $file);
       foreach (array_keys($actualUrl) as $k) {
@@ -226,6 +224,25 @@ class ThemesTest extends \PHPUnit_Framework_TestCase implements HeadlessInterfac
     ));
     $this->assertTrue(isset($result['values']['greenwich']));
     $this->assertFalse(isset($result['values']['_fallback_']));
+  }
+
+  /**
+   * @param array $array
+   *   Ex: [0 => '%%FOO%%/bar']
+   * @return array
+   *   Ex: [1 => '/the/real/foo/bar']
+   */
+  private function interpolateAll($array) {
+    $vars = [
+      '%%CIVICRM_BASE_URL%%' => '',
+      '%%THEMEX_BASE_URL%%' => rtrim(\Civi::resources()->getUrl('org.civicrm.themex'), '/'),
+    ];
+
+    $result = [];
+    foreach ($array as $key => $str) {
+      $result[$key] = strtr($str, $vars);
+    }
+    return $result;
   }
 
 }
