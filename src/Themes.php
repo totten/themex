@@ -75,6 +75,12 @@ class Themes {
     $this->cache = $cache ? $cache : Civi::cache('long');
   }
 
+  public function clear() {
+    $this->cache->delete($this->getCacheKey());
+    $this->activeThemeKey = NULL;
+    $this->themes = NULL;
+  }
+
   /**
    * Determine the name of active theme.
    *
@@ -127,7 +133,7 @@ class Themes {
   public function getAll() {
     if ($this->themes === NULL) {
       // Cache includes URLs/paths, which change with runtime.
-      $cacheKey = 'theme_list_' . \CRM_Core_Config_Runtime::getId();
+      $cacheKey = $this->getCacheKey();
       $this->themes = $this->cache->get($cacheKey);
       if ($this->themes === NULL) {
         $this->themes = $this->buildAll();
@@ -278,6 +284,13 @@ class Themes {
    */
   public function cssId($cssExt, $cssFile) {
     return ($cssExt === 'civicrm') ? $cssFile : "$cssExt-$cssFile";
+  }
+
+  /**
+   * @return string
+   */
+  private function getCacheKey() {
+    return 'theme_list_' . \CRM_Core_Config_Runtime::getId();
   }
 
 }
