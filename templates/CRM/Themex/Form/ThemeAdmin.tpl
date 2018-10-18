@@ -2,7 +2,7 @@
 {include file="CRM/common/formButtons.tpl" location="top"}
 </div>
 
-{if $config->userSystem->is_drupal EQ '1'}
+{if $singleTheme}
 
   <div class="crm-section">
     <div class="label">{ts}Theme{/ts} {help id="theme"}</div>

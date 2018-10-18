@@ -16,6 +16,7 @@ class CRM_Themex_Form_ThemeAdmin extends CRM_Admin_Form_Preferences {
 
   public function preProcess() {
     $this->_varNames = array();
+    $this->assign('singleTheme', \CRM_Core_Config::singleton()->userSystem->is_drupal);
     parent::preProcess();
   }
 
