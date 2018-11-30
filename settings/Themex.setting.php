@@ -43,7 +43,7 @@ return array(
     'name' => 'theme_frontend',
     'type' => 'String',
     'quick_form_type' => 'Select',
-    'html_type' => 'Select',
+    'html_type' => 'select',
     'html_attributes' => array(
       'class' => 'crm-select2',
     ),
@@ -64,7 +64,7 @@ return array(
     'name' => 'theme_backend',
     'type' => 'String',
     'quick_form_type' => 'Select',
-    'html_type' => 'Select',
+    'html_type' => 'select',
     'html_attributes' => array(
       'class' => 'crm-select2',
     ),
