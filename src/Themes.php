@@ -136,7 +136,8 @@ class Themes {
       $cacheKey = $this->getCacheKey();
       $this->themes = $this->cache->get($cacheKey);
       if ($this->themes === NULL) {
-        $this->themes = $this->buildAll();
+        $loader = new Civi\Themex\Themes\Loader();
+        $this->themes = $loader->findAll();
         $this->cache->set($cacheKey, $this->themes);
       }
     }
@@ -206,75 +207,6 @@ class Themes {
     }
 
     throw new \RuntimeException("Failed to resolve URL. Theme metadata may be incomplete.");
-  }
-
-  /**
-   * Construct the list of available themes.
-   *
-   * @return array
-   *   List of themes, keyed by name.
-   * @see Hook::themes
-   */
-  protected function buildAll() {
-    $themes = array(
-      'default' => array(
-        'ext' => 'civicrm',
-        'title' => ts('Automatic'),
-        'help' => ts('Determine a system default automatically'),
-        // This is an alias. url_callback, search_order don't matter.
-      ),
-      'greenwich' => array(
-        'ext' => 'civicrm',
-        'title' => 'Greenwich',
-        'help' => ts('CiviCRM 4.x look-and-feel'),
-      ),
-      'none' => array(
-        'ext' => 'civicrm',
-        'title' => ts('None (Unstyled)'),
-        'help' => ts('Disable CiviCRM\'s built-in CSS files.'),
-        'search_order' => array('none', self::FALLBACK_THEME),
-        'excludes' => array(
-          "css/civicrm.css",
-          "css/bootstrap.css",
-        ),
-      ),
-      self::FALLBACK_THEME => array(
-        'ext' => 'civicrm',
-        'title' => 'Fallback (Abstract Base Theme)',
-        'url_callback' => '\Civi\Themex\Themes\Resolvers::fallback',
-        'search_order' => array(self::FALLBACK_THEME),
-      ),
-    );
-
-    Hook::themes($themes);
-
-    foreach (array_keys($themes) as $themeKey) {
-      $themes[$themeKey] = $this->build($themeKey, $themes[$themeKey]);
-    }
-
-    return $themes;
-  }
-
-  /**
-   * Apply defaults for a given them.
-   *
-   * @param string $themeKey
-   *   The name of the theme. Ex: 'greenwich'.
-   * @param array $theme
-   *   The original theme definition of the theme (per Hook::themes).
-   * @return array
-   *   The full theme definition of the theme (per Hook::themes).
-   * @see Hook::themes
-   */
-  protected function build($themeKey, $theme) {
-    $defaults = array(
-      'name' => $themeKey,
-      'url_callback' => '\Civi\Themex\Themes\Resolvers::simple',
-      'search_order' => array($themeKey, self::FALLBACK_THEME),
-    );
-    $theme = array_merge($defaults, $theme);
-
-    return $theme;
   }
 
   /**
