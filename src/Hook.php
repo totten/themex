@@ -98,4 +98,21 @@ class Hook {
     //    );
   }
 
+  /**
+   * @param array $bundles
+   *  Each key is the name of bundle. For each, specificy:
+   *    - ext: string|NULL, the default location in which to lookup resources (optional)
+   *    - resources: array, each item is a string like:
+   *      'js/foo.js' (relative to the default extension)
+   *      or it can be
+   * @return null
+   */
+  public static function resourceBundles(&$bundles) {
+    \Civi::dispatcher()
+      ->dispatch('hook_civicrm_resourceBundles', \Civi\Core\Event\GenericHookEvent::create([
+        'bundles' => &$bundles,
+      ]));
+    return NULL;
+  }
+
 }
